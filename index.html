@@ -24,7 +24,7 @@ tr.hidden { display: none; }
 .rank { font-weight: 700; color: #999; position: sticky; left: 0; background: #fff; z-index: 1; }
 .img { position: sticky; left: 28px; background: #fff; z-index: 1; }
 .img img { width: 36px; height: 36px; object-fit: contain; border-radius: 4px; background: #fafafa; }
-.name { font-weight: 600; text-align: left; position: sticky; left: 72px; background: #fff; z-index: 1; border-right: 1px solid #e0e0e0; min-width: 250px; max-width: 250px; white-space: normal; word-break: break-all; }
+.name { font-weight: 600; text-align: left; position: sticky; left: 72px; background: #fff; z-index: 1; border-right: 1px solid #e0e0e0; min-width: 210px; max-width: 210px; white-space: normal; word-break: break-all; }
 thead .rank, thead .img, thead .name { background: #fafafa; z-index: 3; }
 tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 .name a { color: #333; text-decoration: none; }
@@ -51,7 +51,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <body>
 <div class="header">
   <h1>Dのスニダン ポケカBOX 相場</h1>
-  <div class="updated">更新: 2026/04/09 09:38　｜　直近取引数の多い順</div>
+  <div class="updated">更新: 2026/04/09 09:41　｜　直近取引数の多い順</div>
 </div>
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="商品名で検索..." oninput="filterTable()">
@@ -59,7 +59,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <div class="table-wrap">
 <table>
 <thead><tr>
-<th class="rank">#</th><th class="img"></th><th class="name">商品名（クリックでスニダンページにジャンプ）</th><th>直近取引数</th><th>最新相場(1個)</th><th>取引時間</th>
+<th class="rank">#</th><th class="img"></th><th class="name">商品名（クリックでスニダンにジャンプ）</th><th>直近取引数</th><th>最新相場(1個)</th><th>取引時間</th>
 <th>前日比</th><th>7日前比</th><th>30日前比</th>
 </tr></thead>
 <tbody id="tableBody">
