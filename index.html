@@ -23,7 +23,7 @@ tr:hover { background: #fafbff; }
 tr.hidden { display: none; }
 .rank { font-weight: 700; color: #999; }
 .img img { width: 36px; height: 36px; object-fit: contain; border-radius: 4px; background: #fafafa; }
-.name { font-weight: 600; text-align: left; }
+.name { font-weight: 600; text-align: left; max-width: 18ch; overflow: hidden; text-overflow: ellipsis; }
 .name a { color: #333; text-decoration: none; }
 .name a:hover { color: #2563eb; text-decoration: underline; }
 .price { font-weight: 700; font-size: 14px; }
@@ -48,7 +48,7 @@ tr.hidden { display: none; }
 <body>
 <div class="header">
   <h1>Dのスニダン ポケカBOX 相場</h1>
-  <div class="updated">更新: 2026/04/09 09:19　｜　直近取引数の多い順</div>
+  <div class="updated">更新: 2026/04/09 09:22　｜　直近取引数の多い順</div>
 </div>
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="商品名で検索..." oninput="filterTable()">
