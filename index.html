@@ -52,20 +52,20 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <body>
 <div class="header">
   <h1>Dのスニダン ポケカBOX 相場</h1>
-  <div class="updated">更新: 2026/04/10 12:09</div>
+  <div class="updated">更新: 2026/04/10 12:14</div>
 </div>
 <div class="controls">
   <input type="text" id="searchInput" placeholder="検索..." oninput="filterTable()">
   <select id="sortSelect" onchange="sortTable()">
-    <option value="trade-desc">取引数多い順</option>
-    <option value="price-asc">価格安い順</option>
-    <option value="price-desc">価格高い順</option>
-    <option value="d1-desc">前日比高い順</option>
-    <option value="d1-asc">前日比低い順</option>
-    <option value="d7-desc">7日前比高い順</option>
-    <option value="d7-asc">7日前比低い順</option>
-    <option value="d30-desc">30日前比高い順</option>
-    <option value="d30-asc">30日前比低い順</option>
+    <option value="trade-desc">取引数が多い順</option>
+    <option value="price-asc">価格が安い順</option>
+    <option value="price-desc">価格が高い順</option>
+    <option value="d1-desc">前日比が高い順</option>
+    <option value="d1-asc">前日比が低い順</option>
+    <option value="d7-desc">7日前比が高い順</option>
+    <option value="d7-asc">7日前比が低い順</option>
+    <option value="d30-desc">30日前比が高い順</option>
+    <option value="d30-asc">30日前比が低い順</option>
   </select>
 </div>
 <div class="table-wrap">
@@ -75,11 +75,11 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <th>前日比</th><th>7日前比</th><th>30日前比</th>
 </tr></thead>
 <tbody id="tableBody">
-<tr data-trade="128" data-price="12000" data-d1="200" data-d7="375" data-d30="2594">
+<tr data-trade="120" data-price="12000" data-d1="200" data-d7="375" data-d30="2594">
 <td class="rank">1</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/244b2a87-ebe1-41bb-a812-6daa8aaddc80.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/762693" target="_blank" rel="noopener">ニンジャスピナー</a></td>
-<td class="trade">128件超<br><span class="trade-up">(+108)</span></td>
+<td class="trade">120件超<br><span class="trade-up">(+100)</span></td>
 <td class="price">¥12,000</td>
 <td class="time">4/10 11:54</td>
 <td class="diff up">+¥200</td><td class="diff up">+¥375</td><td class="diff up">+¥2,594</td>
@@ -669,10 +669,7 @@ function sortTable() {
     const vb = parseInt(b.dataset[key]) || 0;
     return desc ? vb - va : va - vb;
   });
-  rows.forEach((r, i) => {
-    r.querySelector('.rank').textContent = i + 1;
-    tbody.appendChild(r);
-  });
+  rows.forEach(r => tbody.appendChild(r));
 }
 </script>
 </body>
