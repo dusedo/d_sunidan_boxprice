@@ -11,9 +11,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino San
 .header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #fff; padding: 12px 20px; flex-shrink: 0; }
 .header h1 { font-size: 18px; font-weight: 700; }
 .header .updated { font-size: 12px; color: #aaa; margin-top: 4px; }
-.search-box { padding: 8px 0; background: #f5f5f5; flex-shrink: 0; }
-.search-box input { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #ddd; border-radius: 6px; outline: none; background: #fff; }
-.search-box input:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+.controls { display: flex; gap: 6px; padding: 8px 4px; background: #f5f5f5; flex-shrink: 0; flex-wrap: wrap; align-items: center; }
+.controls input { width: 180px; padding: 8px 10px; font-size: 13px; border: 1px solid #ddd; border-radius: 6px; outline: none; background: #fff; }
+.controls input:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+.sort-btn { padding: 5px 8px; font-size: 11px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; white-space: nowrap; }
+.sort-btn:hover { background: #f0f0f0; }
+.sort-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
 .table-wrap { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; background: #fff; }
 table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; white-space: nowrap; }
 thead th { position: sticky; top: 0; background: #fafafa; z-index: 2; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
@@ -51,10 +54,19 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <body>
 <div class="header">
   <h1>Dのスニダン ポケカBOX 相場</h1>
-  <div class="updated">更新: 2026/04/10 09:45　｜　直近取引数の多い順</div>
+  <div class="updated">更新: 2026/04/10 11:53</div>
 </div>
-<div class="search-box">
-  <input type="text" id="searchInput" placeholder="商品名で検索..." oninput="filterTable()">
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="検索..." oninput="filterTable()">
+  <button class="sort-btn active" onclick="sortTable('trade',true)">取引数多</button>
+  <button class="sort-btn" onclick="sortTable('price',false)">価格安</button>
+  <button class="sort-btn" onclick="sortTable('price',true)">価格高</button>
+  <button class="sort-btn" onclick="sortTable('d1',true)">前日比高</button>
+  <button class="sort-btn" onclick="sortTable('d1',false)">前日比低</button>
+  <button class="sort-btn" onclick="sortTable('d7',true)">7日前高</button>
+  <button class="sort-btn" onclick="sortTable('d7',false)">7日前低</button>
+  <button class="sort-btn" onclick="sortTable('d30',true)">30日前高</button>
+  <button class="sort-btn" onclick="sortTable('d30',false)">30日前低</button>
 </div>
 <div class="table-wrap">
 <table>
@@ -63,572 +75,671 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <th>前日比</th><th>7日前比</th><th>30日前比</th>
 </tr></thead>
 <tbody id="tableBody">
-<tr>
+<tr data-trade="120" data-price="11900" data-d1="100" data-d7="275" data-d30="2494">
 <td class="rank">1</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/244b2a87-ebe1-41bb-a812-6daa8aaddc80.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/762693" target="_blank" rel="noopener">ニンジャスピナー</a></td>
-<td class="trade">126件超<br><span class="trade-up">(+6)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/762693" target="_blank" rel="noopener">762693</a></td>
+<td class="trade">120件超</td>
 <td class="price">¥11,900</td>
-<td class="time">4/10 9:24</td>
+<td class="time"></td>
 <td class="diff up">+¥100</td><td class="diff up">+¥275</td><td class="diff up">+¥2,494</td>
 </tr>
-<tr>
+<tr data-trade="109" data-price="4999" data-d1="-1" data-d7="1814" data-d30="2857">
 <td class="rank">2</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251223071721-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/724998" target="_blank" rel="noopener">スタデ100「バトルコレクション」</a></td>
-<td class="trade">110件超<br><span class="trade-up">(+1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/724998" target="_blank" rel="noopener">724998</a></td>
+<td class="trade">109件超</td>
 <td class="price">¥4,999</td>
-<td class="time">1時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥1</td><td class="diff up">+¥1,814</td><td class="diff up">+¥2,857</td>
 </tr>
-<tr>
+<tr data-trade="84" data-price="15499" data-d1="599" data-d7="1202" data-d30="5236">
 <td class="rank">3</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251128091038-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/721913" target="_blank" rel="noopener">MEGAドリームex</a></td>
-<td class="trade">86件超<br><span class="trade-up">(+2)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/721913" target="_blank" rel="noopener">721913</a></td>
+<td class="trade">84件超</td>
 <td class="price">¥15,499</td>
-<td class="time">4/10 8:48</td>
+<td class="time"></td>
 <td class="diff up">+¥599</td><td class="diff up">+¥1,202</td><td class="diff up">+¥5,236</td>
 </tr>
-<tr>
+<tr data-trade="48" data-price="28500" data-d1="0" data-d7="3502" data-d30="9526">
 <td class="rank">4</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250926055512-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/687430" target="_blank" rel="noopener">インフェルノX</a></td>
-<td class="trade">47件超<br><span class="trade-down">(-1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/687430" target="_blank" rel="noopener">687430</a></td>
+<td class="trade">48件超</td>
 <td class="price">¥28,500</td>
-<td class="time">3時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥3,502</td><td class="diff up">+¥9,526</td>
 </tr>
-<tr>
+<tr data-trade="44" data-price="22142" data-d1="142" data-d7="-725" data-d30="-2370">
 <td class="rank">5</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251016094010-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/618444" target="_blank" rel="noopener">ポケモンセンターフクオカ</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/618444" target="_blank" rel="noopener">618444</a></td>
 <td class="trade">44件超</td>
 <td class="price">¥22,142</td>
-<td class="time">4/10 9:14</td>
+<td class="time"></td>
 <td class="diff up">+¥142</td><td class="diff down">-¥725</td><td class="diff down">-¥2,370</td>
 </tr>
-<tr>
+<tr data-trade="39" data-price="68999" data-d1="299" data-d7="12277" data-d30="25330">
 <td class="rank">6</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073446-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/118914" target="_blank" rel="noopener">ポケモンカード151</a></td>
-<td class="trade">40件超<br><span class="trade-up">(+1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/118914" target="_blank" rel="noopener">118914</a></td>
+<td class="trade">39件</td>
 <td class="price">¥68,999</td>
-<td class="time">4/10 8:46</td>
+<td class="time"></td>
 <td class="diff up">+¥299</td><td class="diff up">+¥12,277</td><td class="diff up">+¥25,330</td>
 </tr>
-<tr>
+<tr data-trade="36" data-price="23900" data-d1="900" data-d7="141" data-d30="-2488">
 <td class="rank">7</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251016093844-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/618443" target="_blank" rel="noopener">ポケモンセンターヒロシマ</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/618443" target="_blank" rel="noopener">618443</a></td>
 <td class="trade">36件超</td>
 <td class="price">¥23,900</td>
-<td class="time">4/10 9:14</td>
+<td class="time"></td>
 <td class="diff up">+¥900</td><td class="diff up">+¥141</td><td class="diff down">-¥2,488</td>
 </tr>
-<tr>
+<tr data-trade="35" data-price="8100" data-d1="0" data-d7="143" data-d30="1091">
 <td class="rank">8</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20260126035830-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/743533" target="_blank" rel="noopener">ムニキスゼロ</a></td>
-<td class="trade">36件<br><span class="trade-up">(+1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/743533" target="_blank" rel="noopener">743533</a></td>
+<td class="trade">35件</td>
 <td class="price">¥8,100</td>
-<td class="time">10時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥143</td><td class="diff up">+¥1,091</td>
 </tr>
-<tr>
+<tr data-trade="34" data-price="33333" data-d1="1334" data-d7="6758" data-d30="9818">
 <td class="rank">9</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250321052641-1.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/550898" target="_blank" rel="noopener">ロケット団の栄光 アタッシュケースセット</a></td>
-<td class="trade">33件超<br><span class="trade-down">(-1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/550898" target="_blank" rel="noopener">550898</a></td>
+<td class="trade">34件超</td>
 <td class="price">¥33,333</td>
-<td class="time">4/10 8:41</td>
+<td class="time"></td>
 <td class="diff up">+¥1,334</td><td class="diff up">+¥6,758</td><td class="diff up">+¥9,818</td>
 </tr>
-<tr>
+<tr data-trade="33" data-price="22600" data-d1="-399" data-d7="2969" data-d30="6380">
 <td class="rank">10</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250813062440-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/424297" target="_blank" rel="noopener">テラスタルフェスex</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/424297" target="_blank" rel="noopener">424297</a></td>
 <td class="trade">33件</td>
 <td class="price">¥22,600</td>
-<td class="time">1時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥399</td><td class="diff up">+¥2,969</td><td class="diff up">+¥6,380</td>
 </tr>
-<tr>
+<tr data-trade="32" data-price="29500" data-d1="1500" data-d7="7890" data-d30="10054">
 <td class="rank">11</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251016093928-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/618442" target="_blank" rel="noopener">ポケモンセンタートウホク</a></td>
-<td class="trade">32件<br><span class="trade-up">(+3)</span></td>
-<td class="price">¥17,599</td>
-<td class="time">4/10 9:19</td>
-<td class="diff up">+¥101</td><td class="diff down">-¥1,067</td><td class="diff down">-¥4,442</td>
-</tr>
-<tr>
-<td class="rank">12</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074548-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/550896" target="_blank" rel="noopener">ロケット団の栄光</a></td>
-<td class="trade">30件<br><span class="trade-down">(-2)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/550896" target="_blank" rel="noopener">550896</a></td>
+<td class="trade">32件</td>
 <td class="price">¥29,500</td>
-<td class="time">3時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,500</td><td class="diff up">+¥7,890</td><td class="diff up">+¥10,054</td>
 </tr>
-<tr>
+<tr data-trade="29" data-price="17599" data-d1="101" data-d7="-1067" data-d30="-4442">
+<td class="rank">12</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251016093928-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/618442" target="_blank" rel="noopener">618442</a></td>
+<td class="trade">29件</td>
+<td class="price">¥17,599</td>
+<td class="time"></td>
+<td class="diff up">+¥101</td><td class="diff down">-¥1,067</td><td class="diff down">-¥4,442</td>
+</tr>
+<tr data-trade="28" data-price="10800" data-d1="300" data-d7="1303" data-d30="1675">
 <td class="rank">13</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-5.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/628148" target="_blank" rel="noopener">メガシンフォニア</a></td>
-<td class="trade">29件<br><span class="trade-up">(+1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/628148" target="_blank" rel="noopener">628148</a></td>
+<td class="trade">28件</td>
 <td class="price">¥10,800</td>
-<td class="time">2時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥300</td><td class="diff up">+¥1,303</td><td class="diff up">+¥1,675</td>
 </tr>
-<tr>
+<tr data-trade="26" data-price="18900" data-d1="0" data-d7="1835" data-d30="4689">
 <td class="rank">14</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022075717-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/484952" target="_blank" rel="noopener">バトルパートナーズ</a></td>
-<td class="trade">29件<br><span class="trade-up">(+9)</span></td>
-<td class="price">¥10,299</td>
-<td class="time">4/10 9:33</td>
-<td class="diff down">-¥101</td><td class="diff down">-¥288</td><td class="diff up">+¥1,291</td>
-</tr>
-<tr>
-<td class="rank">15</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-2.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/628146" target="_blank" rel="noopener">メガブレイブ</a></td>
-<td class="trade">26件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥12,799</td>
-<td class="time">4/10 9:25</td>
-<td class="diff up">+¥302</td><td class="diff up">+¥771</td><td class="diff up">+¥1,795</td>
-</tr>
-<tr>
-<td class="rank">16</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074908-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/151755" target="_blank" rel="noopener">シャイニートレジャーex</a></td>
-<td class="trade">24件<br><span class="trade-down">(-2)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/151755" target="_blank" rel="noopener">151755</a></td>
+<td class="trade">26件</td>
 <td class="price">¥18,900</td>
-<td class="time">11時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥1,835</td><td class="diff up">+¥4,689</td>
 </tr>
-<tr>
-<td class="rank">17</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251029025022-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/140591" target="_blank" rel="noopener">古代の咆哮</a></td>
-<td class="trade">22件<br><span class="trade-up">(+9)</span></td>
-<td class="price">¥11,000</td>
-<td class="time">15時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥1,602</td><td class="diff up">+¥1,018</td>
+<tr data-trade="25" data-price="12799" data-d1="302" data-d7="771" data-d30="1795">
+<td class="rank">15</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-2.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/628146" target="_blank" rel="noopener">628146</a></td>
+<td class="trade">25件</td>
+<td class="price">¥12,799</td>
+<td class="time"></td>
+<td class="diff up">+¥302</td><td class="diff up">+¥771</td><td class="diff up">+¥1,795</td>
 </tr>
-<tr>
-<td class="rank">18</td>
+<tr data-trade="20" data-price="10299" data-d1="-101" data-d7="-288" data-d30="1291">
+<td class="rank">16</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022075717-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/484952" target="_blank" rel="noopener">484952</a></td>
+<td class="trade">20件</td>
+<td class="price">¥10,299</td>
+<td class="time"></td>
+<td class="diff down">-¥101</td><td class="diff down">-¥288</td><td class="diff up">+¥1,291</td>
+</tr>
+<tr data-trade="19" data-price="89997" data-d1="197" data-d7="16464" data-d30="25421">
+<td class="rank">17</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20240803145741-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/135521" target="_blank" rel="noopener">ポケモンカードゲーム クラシック</a></td>
-<td class="trade">20件<br><span class="trade-up">(+1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/135521" target="_blank" rel="noopener">135521</a></td>
+<td class="trade">19件</td>
 <td class="price">¥89,997</td>
-<td class="time">1時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥197</td><td class="diff up">+¥16,464</td><td class="diff up">+¥25,421</td>
 </tr>
-<tr>
-<td class="rank">19</td>
+<tr data-trade="18" data-price="32800" data-d1="1800" data-d7="3463" data-d30="7426">
+<td class="rank">18</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251226022933-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/584774" target="_blank" rel="noopener">デラックス「ブラックボルト」</a></td>
-<td class="trade">20件<br><span class="trade-up">(+2)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/584774" target="_blank" rel="noopener">584774</a></td>
+<td class="trade">18件</td>
 <td class="price">¥32,800</td>
-<td class="time">4時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,800</td><td class="diff up">+¥3,463</td><td class="diff up">+¥7,426</td>
 </tr>
-<tr>
+<tr data-trade="18" data-price="10000" data-d1="0" data-d7="331" data-d30="902">
+<td class="rank">19</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022083149-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/106864" target="_blank" rel="noopener">106864</a></td>
+<td class="trade">18件</td>
+<td class="price">¥10,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥331</td><td class="diff up">+¥902</td>
+</tr>
+<tr data-trade="17" data-price="21000" data-d1="1250" data-d7="1425" data-d30="5185">
 <td class="rank">20</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022080309-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/518728" target="_blank" rel="noopener">熱風のアリーナ</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/518728" target="_blank" rel="noopener">518728</a></td>
 <td class="trade">17件</td>
 <td class="price">¥21,000</td>
-<td class="time">14時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,250</td><td class="diff up">+¥1,425</td><td class="diff up">+¥5,185</td>
 </tr>
-<tr>
+<tr data-trade="17" data-price="11000" data-d1="1034" data-d7="1624" data-d30="1202">
 <td class="rank">21</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022080114-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/283206" target="_blank" rel="noopener">ステラミラクル</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/283206" target="_blank" rel="noopener">283206</a></td>
 <td class="trade">17件</td>
 <td class="price">¥11,000</td>
-<td class="time">15時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,034</td><td class="diff up">+¥1,624</td><td class="diff up">+¥1,202</td>
 </tr>
-<tr>
+<tr data-trade="15" data-price="19999" data-d1="0" data-d7="1837" data-d30="4002">
 <td class="rank">22</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081321-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/140593" target="_blank" rel="noopener">未来の一閃</a></td>
-<td class="trade">15件</td>
-<td class="price">¥10,500</td>
-<td class="time">14時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥1,733</td><td class="diff up">+¥893</td>
-</tr>
-<tr>
-<td class="rank">23</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022080406-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/127743" target="_blank" rel="noopener">黒炎の支配者</a></td>
-<td class="trade">14件<br><span class="trade-down">(-1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/127743" target="_blank" rel="noopener">127743</a></td>
+<td class="trade">15件</td>
 <td class="price">¥19,999</td>
-<td class="time">10時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥1,837</td><td class="diff up">+¥4,002</td>
 </tr>
-<tr>
+<tr data-trade="15" data-price="10500" data-d1="0" data-d7="1733" data-d30="893">
+<td class="rank">23</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081321-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/140593" target="_blank" rel="noopener">140593</a></td>
+<td class="trade">15件</td>
+<td class="price">¥10,500</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,733</td><td class="diff up">+¥893</td>
+</tr>
+<tr data-trade="14" data-price="61999" data-d1="-1" data-d7="4714" data-d30="16065">
 <td class="rank">24</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073527-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/86213" target="_blank" rel="noopener">ロストアビス</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/86213" target="_blank" rel="noopener">86213</a></td>
 <td class="trade">14件</td>
 <td class="price">¥61,999</td>
-<td class="time">6時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥1</td><td class="diff up">+¥4,714</td><td class="diff up">+¥16,065</td>
 </tr>
-<tr>
+<tr data-trade="14" data-price="24980" data-d1="1182" data-d7="2007" data-d30="7029">
 <td class="rank">25</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251209093105-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/32870" target="_blank" rel="noopener">スターバース</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/32870" target="_blank" rel="noopener">32870</a></td>
 <td class="trade">14件</td>
 <td class="price">¥24,980</td>
-<td class="time">10時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,182</td><td class="diff up">+¥2,007</td><td class="diff up">+¥7,029</td>
 </tr>
-<tr>
+<tr data-trade="14" data-price="16999" data-d1="-1" data-d7="5652" data-d30="0">
 <td class="rank">26</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074403-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/204134" target="_blank" rel="noopener">クリムゾンヘイズ</a></td>
-<td class="trade">12件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥15,000</td>
-<td class="time">19時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥488</td><td class="diff up">+¥929</td>
-</tr>
-<tr>
-<td class="rank">27</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-6.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/628199" target="_blank" rel="noopener">ポケモンセンターセット「メガシンフォニア」</a></td>
-<td class="trade">11件</td>
-<td class="price">¥22,000</td>
-<td class="time">16時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥1,509</td><td class="diff up">+¥3,819</td>
-</tr>
-<tr>
-<td class="rank">28</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081426-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/97143" target="_blank" rel="noopener">パラダイムトリガー</a></td>
-<td class="trade">11件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥28,499</td>
-<td class="time">9時間前</td>
-<td class="diff up">+¥21</td><td class="diff up">+¥7,270</td><td class="diff up">+¥7,628</td>
-</tr>
-<tr>
-<td class="rank">29</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20241121014156-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/423587" target="_blank" rel="noopener">スペシャルバトルセット</a></td>
-<td class="trade">11件<br><span class="trade-down">(-3)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/423587" target="_blank" rel="noopener">423587</a></td>
+<td class="trade">14件</td>
 <td class="price">¥16,999</td>
-<td class="time">1時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥1</td><td class="diff up">+¥5,652</td><td class="diff">-</td>
 </tr>
-<tr>
+<tr data-trade="13" data-price="11000" data-d1="0" data-d7="1602" data-d30="1018">
+<td class="rank">27</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251029025022-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/140591" target="_blank" rel="noopener">140591</a></td>
+<td class="trade">13件</td>
+<td class="price">¥11,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,602</td><td class="diff up">+¥1,018</td>
+</tr>
+<tr data-trade="11" data-price="22000" data-d1="0" data-d7="1509" data-d30="3819">
+<td class="rank">28</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-6.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/628199" target="_blank" rel="noopener">628199</a></td>
+<td class="trade">11件</td>
+<td class="price">¥22,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,509</td><td class="diff up">+¥3,819</td>
+</tr>
+<tr data-trade="11" data-price="15000" data-d1="0" data-d7="488" data-d30="929">
+<td class="rank">29</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074403-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/204134" target="_blank" rel="noopener">204134</a></td>
+<td class="trade">11件</td>
+<td class="price">¥15,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥488</td><td class="diff up">+¥929</td>
+</tr>
+<tr data-trade="10" data-price="28499" data-d1="21" data-d7="7270" data-d30="7628">
 <td class="rank">30</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251211074651-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/584776" target="_blank" rel="noopener">デラックス「ホワイトフレア」</a></td>
-<td class="trade">11件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥27,000</td>
-<td class="time">2時間前</td>
-<td class="diff up">+¥2,005</td><td class="diff up">+¥3,285</td><td class="diff up">+¥6,214</td>
-</tr>
-<tr>
-<td class="rank">31</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251209025030-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/116897" target="_blank" rel="noopener">スノーハザード</a></td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081426-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/97143" target="_blank" rel="noopener">97143</a></td>
 <td class="trade">10件</td>
-<td class="price">¥9,999</td>
-<td class="time">16時間前</td>
-<td class="diff">±0</td><td class="diff down">-¥99</td><td class="diff down">-¥149</td>
+<td class="price">¥28,499</td>
+<td class="time"></td>
+<td class="diff up">+¥21</td><td class="diff up">+¥7,270</td><td class="diff up">+¥7,628</td>
 </tr>
-<tr>
-<td class="rank">32</td>
+<tr data-trade="10" data-price="11950" data-d1="50" data-d7="391" data-d30="491">
+<td class="rank">31</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081020-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/116901" target="_blank" rel="noopener">クレイバースト (クレバ) </a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/116901" target="_blank" rel="noopener">116901</a></td>
 <td class="trade">10件</td>
 <td class="price">¥11,950</td>
-<td class="time">9時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥50</td><td class="diff up">+¥391</td><td class="diff up">+¥491</td>
 </tr>
-<tr>
+<tr data-trade="10" data-price="27000" data-d1="2005" data-d7="3285" data-d30="6214">
+<td class="rank">32</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251211074651-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/584776" target="_blank" rel="noopener">584776</a></td>
+<td class="trade">10件</td>
+<td class="price">¥27,000</td>
+<td class="time"></td>
+<td class="diff up">+¥2,005</td><td class="diff up">+¥3,285</td><td class="diff up">+¥6,214</td>
+</tr>
+<tr data-trade="10" data-price="22000" data-d1="1000" data-d7="2367" data-d30="4093">
 <td class="rank">33</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022075913-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/584772" target="_blank" rel="noopener">ホワイトフレア</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/584772" target="_blank" rel="noopener">584772</a></td>
 <td class="trade">10件</td>
 <td class="price">¥22,000</td>
-<td class="time">4時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥1,000</td><td class="diff up">+¥2,367</td><td class="diff up">+¥4,093</td>
 </tr>
-<tr>
+<tr data-trade="10" data-price="9999" data-d1="0" data-d7="-99" data-d30="-149">
 <td class="rank">34</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073625-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/395189" target="_blank" rel="noopener">超電ブレイカー</a></td>
-<td class="trade">9件<br><span class="trade-up">(+2)</span></td>
-<td class="price">¥37,999</td>
-<td class="time">4/10 9:34</td>
-<td class="diff up">+¥222</td><td class="diff up">+¥2,114</td><td class="diff up">+¥11,039</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251209025030-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/116897" target="_blank" rel="noopener">116897</a></td>
+<td class="trade">10件</td>
+<td class="price">¥9,999</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff down">-¥99</td><td class="diff down">-¥149</td>
 </tr>
-<tr>
+<tr data-trade="10" data-price="53599" data-d1="0" data-d7="1296" data-d30="5398">
 <td class="rank">35</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220620100922-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/77198" target="_blank" rel="noopener">ポケモン GO スペシャルセット</a></td>
-<td class="trade">9件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥14,800</td>
-<td class="time">4/10 9:28</td>
-<td class="diff up">+¥11</td><td class="diff up">+¥4,511</td><td class="diff up">+¥5,041</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20240523060745-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/138918" target="_blank" rel="noopener">138918</a></td>
+<td class="trade">10件</td>
+<td class="price">¥53,599</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,296</td><td class="diff up">+¥5,398</td>
 </tr>
-<tr>
+<tr data-trade="9" data-price="4550" data-d1="0" data-d7="168" data-d30="501">
 <td class="rank">36</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20230727100424-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/131057" target="_blank" rel="noopener">デッキビルドBOX 黒炎の支配者</a></td>
-<td class="trade">8件<br><span class="trade-down">(-1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/131057" target="_blank" rel="noopener">131057</a></td>
+<td class="trade">9件</td>
 <td class="price">¥4,550</td>
-<td class="time">23時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥168</td><td class="diff up">+¥501</td>
 </tr>
-<tr>
+<tr data-trade="8" data-price="14800" data-d1="11" data-d7="4511" data-d30="5041">
 <td class="rank">37</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220620100922-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/77198" target="_blank" rel="noopener">77198</a></td>
+<td class="trade">8件</td>
+<td class="price">¥14,800</td>
+<td class="time"></td>
+<td class="diff up">+¥11</td><td class="diff up">+¥4,511</td><td class="diff up">+¥5,041</td>
+</tr>
+<tr data-trade="8" data-price="31980" data-d1="0" data-d7="4271" data-d30="8415">
+<td class="rank">38</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251112072422-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/101885" target="_blank" rel="noopener">VSTARユニバース</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/101885" target="_blank" rel="noopener">101885</a></td>
 <td class="trade">8件</td>
 <td class="price">¥31,980</td>
-<td class="time">13時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥4,271</td><td class="diff up">+¥8,415</td>
 </tr>
-<tr>
-<td class="rank">38</td>
+<tr data-trade="8" data-price="22999" data-d1="0" data-d7="2793" data-d30="7377">
+<td class="rank">39</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220620101014-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/58920" target="_blank" rel="noopener">ポケモン GO</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/58920" target="_blank" rel="noopener">58920</a></td>
 <td class="trade">8件</td>
 <td class="price">¥22,999</td>
-<td class="time">10時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥2,793</td><td class="diff up">+¥7,377</td>
 </tr>
-<tr>
-<td class="rank">39</td>
+<tr data-trade="8" data-price="66000" data-d1="-999" data-d7="9168" data-d30="24424">
+<td class="rank">40</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251031060422-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/14024" target="_blank" rel="noopener">フュージョンアーツ</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/14024" target="_blank" rel="noopener">14024</a></td>
 <td class="trade">8件</td>
 <td class="price">¥66,000</td>
-<td class="time">9時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥999</td><td class="diff up">+¥9,168</td><td class="diff up">+¥24,424</td>
 </tr>
-<tr>
-<td class="rank">40</td>
+<tr data-trade="7" data-price="37999" data-d1="222" data-d7="2114" data-d30="11039">
+<td class="rank">41</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073625-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/395189" target="_blank" rel="noopener">395189</a></td>
+<td class="trade">7件</td>
+<td class="price">¥37,999</td>
+<td class="time"></td>
+<td class="diff up">+¥222</td><td class="diff up">+¥2,114</td><td class="diff up">+¥11,039</td>
+</tr>
+<tr data-trade="7" data-price="19800" data-d1="0" data-d7="1682" data-d30="1683">
+<td class="rank">42</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/pkmn-1.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/12875" target="_blank" rel="noopener">シャイニースターV</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/12875" target="_blank" rel="noopener">12875</a></td>
 <td class="trade">7件</td>
 <td class="price">¥19,800</td>
-<td class="time">14時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥1,682</td><td class="diff up">+¥1,683</td>
 </tr>
-<tr>
-<td class="rank">41</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-3.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/628198" target="_blank" rel="noopener">ポケモンセンターセット「メガブレイブ」</a></td>
-<td class="trade">7件</td>
-<td class="price">¥27,000</td>
-<td class="time">11時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥1,803</td><td class="diff up">+¥4,353</td>
-</tr>
-<tr>
-<td class="rank">42</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251117092523-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/89881" target="_blank" rel="noopener">白熱のアルカナ</a></td>
-<td class="trade">7件</td>
-<td class="price">¥10,999</td>
-<td class="time">9時間前</td>
-<td class="diff up">+¥199</td><td class="diff up">+¥541</td><td class="diff up">+¥223</td>
-</tr>
-<tr>
+<tr data-trade="7" data-price="299998" data-d1="5998" data-d7="56846" data-d30="59847">
 <td class="rank">43</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073859-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/584770" target="_blank" rel="noopener">ブラックボルト</a></td>
-<td class="trade">7件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥24,000</td>
-<td class="time">1時間前</td>
-<td class="diff up">+¥500</td><td class="diff up">+¥2,906</td><td class="diff up">+¥5,283</td>
-</tr>
-<tr>
-<td class="rank">44</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251120094943-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/12889" target="_blank" rel="noopener">蒼空ストリーム</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/12889" target="_blank" rel="noopener">12889</a></td>
 <td class="trade">7件</td>
 <td class="price">¥299,998</td>
-<td class="time">9時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥5,998</td><td class="diff up">+¥56,846</td><td class="diff up">+¥59,847</td>
 </tr>
-<tr>
+<tr data-trade="7" data-price="27000" data-d1="0" data-d7="1803" data-d30="4353">
+<td class="rank">44</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020822-3.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/628198" target="_blank" rel="noopener">628198</a></td>
+<td class="trade">7件</td>
+<td class="price">¥27,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,803</td><td class="diff up">+¥4,353</td>
+</tr>
+<tr data-trade="7" data-price="10999" data-d1="199" data-d7="541" data-d30="223">
 <td class="rank">45</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251117092523-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/89881" target="_blank" rel="noopener">89881</a></td>
+<td class="trade">7件</td>
+<td class="price">¥10,999</td>
+<td class="time"></td>
+<td class="diff up">+¥199</td><td class="diff up">+¥541</td><td class="diff up">+¥223</td>
+</tr>
+<tr data-trade="6" data-price="24000" data-d1="500" data-d7="2906" data-d30="5283">
+<td class="rank">46</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073859-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/584770" target="_blank" rel="noopener">584770</a></td>
+<td class="trade">6件</td>
+<td class="price">¥24,000</td>
+<td class="time"></td>
+<td class="diff up">+¥500</td><td class="diff up">+¥2,906</td><td class="diff up">+¥5,283</td>
+</tr>
+<tr data-trade="6" data-price="21000" data-d1="-900" data-d7="7243" data-d30="12166">
+<td class="rank">47</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251211074806-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/98947" target="_blank" rel="noopener">スペシャルデッキセット リザードンVSTAR vs レックウザVMAX</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/98947" target="_blank" rel="noopener">98947</a></td>
 <td class="trade">6件</td>
 <td class="price">¥21,000</td>
-<td class="time">1時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥900</td><td class="diff up">+¥7,243</td><td class="diff up">+¥12,166</td>
 </tr>
-<tr>
-<td class="rank">46</td>
+<tr data-trade="6" data-price="22000" data-d1="0" data-d7="903" data-d30="1402">
+<td class="rank">48</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250813065812-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/117179" target="_blank" rel="noopener">ポケモンセンター・ジムセット</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/117179" target="_blank" rel="noopener">117179</a></td>
 <td class="trade">6件</td>
 <td class="price">¥22,000</td>
-<td class="time">2日前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff up">+¥903</td><td class="diff up">+¥1,402</td>
 </tr>
-<tr>
-<td class="rank">47</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022075124-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/674432" target="_blank" rel="noopener">スターターセットMEGA「メガゲンガーex」</a></td>
-<td class="trade">5件</td>
-<td class="price">¥2,400</td>
-<td class="time">1日前</td>
-<td class="diff">±0</td><td class="diff up">+¥181</td><td class="diff up">+¥281</td>
-</tr>
-<tr>
-<td class="rank">48</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220403084419-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/47945" target="_blank" rel="noopener">スタートデッキ100 コロコロコミックver.</a></td>
-<td class="trade">5件</td>
-<td class="price">¥39,000</td>
-<td class="time">10時間前</td>
-<td class="diff">±0</td><td class="diff down">-¥12,832</td><td class="diff up">+¥17,031</td>
-</tr>
-<tr>
+<tr data-trade="5" data-price="155000" data-d1="6000" data-d7="16025" data-d30="19074">
 <td class="rank">49</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074044-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/12883" target="_blank" rel="noopener">イーブイヒーローズ</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/12883" target="_blank" rel="noopener">12883</a></td>
 <td class="trade">5件</td>
 <td class="price">¥155,000</td>
-<td class="time">4/10 9:21</td>
+<td class="time"></td>
 <td class="diff up">+¥6,000</td><td class="diff up">+¥16,025</td><td class="diff up">+¥19,074</td>
 </tr>
-<tr>
+<tr data-trade="5" data-price="39000" data-d1="0" data-d7="-12832" data-d30="17031">
 <td class="rank">50</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074319-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/111467" target="_blank" rel="noopener">トリプレットビート</a></td>
-<td class="trade">5件<br><span class="trade-up">(+2)</span></td>
-<td class="price">¥16,000</td>
-<td class="time">4/10 9:00</td>
-<td class="diff">±0</td><td class="diff up">+¥482</td><td class="diff down">-¥114</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220403084419-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/47945" target="_blank" rel="noopener">47945</a></td>
+<td class="trade">5件</td>
+<td class="price">¥39,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff down">-¥12,832</td><td class="diff up">+¥17,031</td>
 </tr>
-<tr>
+<tr data-trade="5" data-price="2400" data-d1="0" data-d7="181" data-d30="281">
 <td class="rank">51</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251023022522-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/261657" target="_blank" rel="noopener">ナイトワンダラー</a></td>
-<td class="trade">4件<br><span class="trade-up">(+1)</span></td>
-<td class="price">¥9,500</td>
-<td class="time">4/10 8:51</td>
-<td class="diff down">-¥635</td><td class="diff down">-¥847</td><td class="diff down">-¥323</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022075124-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/674432" target="_blank" rel="noopener">674432</a></td>
+<td class="trade">5件</td>
+<td class="price">¥2,400</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥181</td><td class="diff up">+¥281</td>
 </tr>
-<tr>
+<tr data-trade="4" data-price="34899" data-d1="399" data-d7="5511" data-d30="10907">
 <td class="rank">52</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251112071849-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/15573" target="_blank" rel="noopener">VMAXクライマックス</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/15573" target="_blank" rel="noopener">15573</a></td>
 <td class="trade">4件</td>
 <td class="price">¥34,899</td>
-<td class="time">2時間前</td>
+<td class="time"></td>
 <td class="diff up">+¥399</td><td class="diff up">+¥5,511</td><td class="diff up">+¥10,907</td>
 </tr>
-<tr>
+<tr data-trade="4" data-price="72600" data-d1="-1890" data-d7="2364" data-d30="19115">
 <td class="rank">53</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251127034422-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/14025" target="_blank" rel="noopener">25th アニバーサリー コレクション</a></td>
-<td class="trade">3件<br><span class="trade-down">(-1)</span></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/14025" target="_blank" rel="noopener">14025</a></td>
+<td class="trade">4件</td>
 <td class="price">¥72,600</td>
-<td class="time">9時間前</td>
+<td class="time"></td>
 <td class="diff down">-¥1,890</td><td class="diff up">+¥2,364</td><td class="diff up">+¥19,115</td>
 </tr>
-<tr>
+<tr data-trade="3" data-price="16000" data-d1="0" data-d7="482" data-d30="-114">
 <td class="rank">54</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251212074614-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/14671" target="_blank" rel="noopener">VMAXライジング</a></td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074319-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/111467" target="_blank" rel="noopener">111467</a></td>
 <td class="trade">3件</td>
-<td class="price">¥118,900</td>
-<td class="time">21時間前</td>
-<td class="diff">-</td><td class="diff">-</td><td class="diff">-</td>
+<td class="price">¥16,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥482</td><td class="diff down">-¥114</td>
 </tr>
-<tr>
+<tr data-trade="3" data-price="8000" data-d1="0" data-d7="-30" data-d30="470">
 <td class="rank">55</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20221201090804-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/102646" target="_blank" rel="noopener">シンジュ団 スペシャルセット</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/102646" target="_blank" rel="noopener">102646</a></td>
 <td class="trade">3件</td>
 <td class="price">¥8,000</td>
-<td class="time">12時間前</td>
+<td class="time"></td>
 <td class="diff">±0</td><td class="diff down">-¥30</td><td class="diff up">+¥470</td>
 </tr>
-<tr>
+<tr data-trade="3" data-price="9500" data-d1="-635" data-d7="-847" data-d30="-323">
 <td class="rank">56</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250220051832-1.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/509419" target="_blank" rel="noopener">スターターセットex「マリィのモルペコ&オーロンゲex」</a></td>
-<td class="trade">2件</td>
-<td class="price">¥2,649</td>
-<td class="time">12時間前</td>
-<td class="diff up">+¥18</td><td class="diff down">-¥21</td><td class="diff">-</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251023022522-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/261657" target="_blank" rel="noopener">261657</a></td>
+<td class="trade">3件</td>
+<td class="price">¥9,500</td>
+<td class="time"></td>
+<td class="diff down">-¥635</td><td class="diff down">-¥847</td><td class="diff down">-¥323</td>
 </tr>
-<tr>
+<tr data-trade="3" data-price="118900" data-d1="0" data-d7="0" data-d30="0">
 <td class="rank">57</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251023022714-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/224649" target="_blank" rel="noopener">変幻の仮面</a></td>
-<td class="trade">2件</td>
-<td class="price">¥11,900</td>
-<td class="time">16時間前</td>
-<td class="diff up">+¥200</td><td class="diff up">+¥743</td><td class="diff up">+¥110</td>
-</tr>
-<tr>
-<td class="rank">58</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20221023090630-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/97215" target="_blank" rel="noopener">ミステリーボックス</a></td>
-<td class="trade">2件</td>
-<td class="price">¥13,000</td>
-<td class="time">23時間前</td>
-<td class="diff up">+¥200</td><td class="diff up">+¥1,653</td><td class="diff up">+¥3,643</td>
-</tr>
-<tr>
-<td class="rank">59</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020821-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/628150" target="_blank" rel="noopener">プレミアムトレーナーボックスMEGA</a></td>
-<td class="trade">2件</td>
-<td class="price">¥8,400</td>
-<td class="time">14時間前</td>
-<td class="diff">±0</td><td class="diff up">+¥652</td><td class="diff up">+¥743</td>
-</tr>
-<tr>
-<td class="rank">60</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251223072117-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/735757" target="_blank" rel="noopener">スタデ100「バトルコレクション コロちゃおver」</a></td>
-<td class="trade">2件</td>
-<td class="price">¥1,240</td>
-<td class="time">2026/04/05</td>
-<td class="diff">±0</td><td class="diff up">+¥209</td><td class="diff up">+¥209</td>
-</tr>
-<tr>
-<td class="rank">61</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20221003101353-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/14669" target="_blank" rel="noopener">ムゲンゾーン</a></td>
-<td class="trade">0件</td>
-<td class="price">¥55,555</td>
-<td class="time">1日前</td>
-<td class="diff down">-¥404</td><td class="diff up">+¥8,570</td><td class="diff up">+¥19,570</td>
-</tr>
-<tr>
-<td class="rank">62</td>
-<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20240516071343-2.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/249117" target="_blank" rel="noopener">テラスタル リザードンex</a></td>
-<td class="trade">0件</td>
-<td class="price">¥2,300</td>
-<td class="time">1日前</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251212074614-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/14671" target="_blank" rel="noopener">14671</a></td>
+<td class="trade">3件</td>
+<td class="price">¥118,900</td>
+<td class="time"></td>
 <td class="diff">-</td><td class="diff">-</td><td class="diff">-</td>
 </tr>
-<tr>
+<tr data-trade="2" data-price="11900" data-d1="200" data-d7="743" data-d30="110">
+<td class="rank">58</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251023022714-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/224649" target="_blank" rel="noopener">224649</a></td>
+<td class="trade">2件</td>
+<td class="price">¥11,900</td>
+<td class="time"></td>
+<td class="diff up">+¥200</td><td class="diff up">+¥743</td><td class="diff up">+¥110</td>
+</tr>
+<tr data-trade="2" data-price="1240" data-d1="0" data-d7="209" data-d30="209">
+<td class="rank">59</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251223072117-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/735757" target="_blank" rel="noopener">735757</a></td>
+<td class="trade">2件</td>
+<td class="price">¥1,240</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥209</td><td class="diff up">+¥209</td>
+</tr>
+<tr data-trade="2" data-price="13000" data-d1="200" data-d7="1653" data-d30="3643">
+<td class="rank">60</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20221023090630-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/97215" target="_blank" rel="noopener">97215</a></td>
+<td class="trade">2件</td>
+<td class="price">¥13,000</td>
+<td class="time"></td>
+<td class="diff up">+¥200</td><td class="diff up">+¥1,653</td><td class="diff up">+¥3,643</td>
+</tr>
+<tr data-trade="2" data-price="8400" data-d1="0" data-d7="652" data-d30="743">
+<td class="rank">61</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250805020821-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/628150" target="_blank" rel="noopener">628150</a></td>
+<td class="trade">2件</td>
+<td class="price">¥8,400</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥652</td><td class="diff up">+¥743</td>
+</tr>
+<tr data-trade="2" data-price="2649" data-d1="18" data-d7="-21" data-d30="0">
+<td class="rank">62</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250220051832-1.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/509419" target="_blank" rel="noopener">509419</a></td>
+<td class="trade">2件</td>
+<td class="price">¥2,649</td>
+<td class="time"></td>
+<td class="diff up">+¥18</td><td class="diff down">-¥21</td><td class="diff">-</td>
+</tr>
+<tr data-trade="1" data-price="1198" data-d1="0" data-d7="0" data-d30="0">
 <td class="rank">63</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20211221114352-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/15353" target="_blank" rel="noopener">15353</a></td>
+<td class="trade">1件</td>
+<td class="price">¥1,198</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff">-</td><td class="diff">-</td>
+</tr>
+<tr data-trade="1" data-price="245000" data-d1="0" data-d7="7424" data-d30="16114">
+<td class="rank">64</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251211074728-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/15595" target="_blank" rel="noopener">15595</a></td>
+<td class="trade">1件</td>
+<td class="price">¥245,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥7,424</td><td class="diff up">+¥16,114</td>
+</tr>
+<tr data-trade="1" data-price="19500" data-d1="0" data-d7="1152" data-d30="3610">
+<td class="rank">65</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251127033758-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/74242" target="_blank" rel="noopener">74242</a></td>
+<td class="trade">1件</td>
+<td class="price">¥19,500</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,152</td><td class="diff up">+¥3,610</td>
+</tr>
+<tr data-trade="1" data-price="17450" data-d1="0" data-d7="-1041" data-d30="0">
+<td class="rank">66</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220808024946-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/87387" target="_blank" rel="noopener">87387</a></td>
+<td class="trade">1件</td>
+<td class="price">¥17,450</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff down">-¥1,041</td><td class="diff">-</td>
+</tr>
+<tr data-trade="0" data-price="47900" data-d1="0" data-d7="1908" data-d30="7409">
+<td class="rank">67</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022074817-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/12879" target="_blank" rel="noopener">12879</a></td>
+<td class="trade">0件</td>
+<td class="price">¥47,900</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,908</td><td class="diff up">+¥7,409</td>
+</tr>
+<tr data-trade="0" data-price="17700" data-d1="-296" data-d7="-341" data-d30="1204">
+<td class="rank">68</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251117092617-0.webp?size=m" alt="" loading="lazy"></td>
-<td class="name"><a href="https://snkrdunk.com/apparels/66738" target="_blank" rel="noopener">タイムゲイザー</a></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/66738" target="_blank" rel="noopener">66738</a></td>
 <td class="trade">0件</td>
 <td class="price">¥17,700</td>
-<td class="time">1日前</td>
+<td class="time"></td>
 <td class="diff down">-¥296</td><td class="diff down">-¥341</td><td class="diff up">+¥1,204</td>
+</tr>
+<tr data-trade="0" data-price="55555" data-d1="-404" data-d7="8570" data-d30="19570">
+<td class="rank">69</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20221003101353-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/14669" target="_blank" rel="noopener">14669</a></td>
+<td class="trade">0件</td>
+<td class="price">¥55,555</td>
+<td class="time"></td>
+<td class="diff down">-¥404</td><td class="diff up">+¥8,570</td><td class="diff up">+¥19,570</td>
+</tr>
+<tr data-trade="0" data-price="4699" data-d1="0" data-d7="-31" data-d30="-538">
+<td class="rank">70</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250123082656-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/485656" target="_blank" rel="noopener">485656</a></td>
+<td class="trade">0件</td>
+<td class="price">¥4,699</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff down">-¥31</td><td class="diff down">-¥538</td>
+</tr>
+<tr data-trade="0" data-price="34499" data-d1="0" data-d7="-8752" data-d30="9014">
+<td class="rank">71</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/pkmn-28.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/12902" target="_blank" rel="noopener">12902</a></td>
+<td class="trade">0件</td>
+<td class="price">¥34,499</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff down">-¥8,752</td><td class="diff up">+¥9,014</td>
+</tr>
+<tr data-trade="0" data-price="49999" data-d1="0" data-d7="9255" data-d30="9105">
+<td class="rank">72</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/pkmn-tcg-en-Charizardx-UPC.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/721962" target="_blank" rel="noopener">721962</a></td>
+<td class="trade">0件</td>
+<td class="price">¥49,999</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥9,255</td><td class="diff up">+¥9,105</td>
+</tr>
+<tr data-trade="0" data-price="47000" data-d1="0" data-d7="1758" data-d30="10015">
+<td class="rank">73</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251031060556-0.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/146968" target="_blank" rel="noopener">146968</a></td>
+<td class="trade">0件</td>
+<td class="price">¥47,000</td>
+<td class="time"></td>
+<td class="diff">±0</td><td class="diff up">+¥1,758</td><td class="diff up">+¥10,015</td>
+</tr>
+<tr data-trade="0" data-price="2300" data-d1="0" data-d7="0" data-d30="0">
+<td class="rank">74</td>
+<td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20240516071343-2.webp?size=m" alt="" loading="lazy"></td>
+<td class="name"><a href="https://snkrdunk.com/apparels/249117" target="_blank" rel="noopener">249117</a></td>
+<td class="trade">0件</td>
+<td class="price">¥2,300</td>
+<td class="time"></td>
+<td class="diff">-</td><td class="diff">-</td><td class="diff">-</td>
 </tr>
 
 </tbody>
@@ -645,6 +756,21 @@ function filterTable() {
     const text = name.textContent.toLowerCase();
     row.classList.toggle('hidden', q !== '' && !text.includes(q));
   });
+}
+function sortTable(key, desc) {
+  const tbody = document.getElementById('tableBody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort((a, b) => {
+    const va = parseInt(a.dataset[key]) || 0;
+    const vb = parseInt(b.dataset[key]) || 0;
+    return desc ? vb - va : va - vb;
+  });
+  rows.forEach((r, i) => {
+    r.querySelector('.rank').textContent = i + 1;
+    tbody.appendChild(r);
+  });
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
 }
 </script>
 </body>
