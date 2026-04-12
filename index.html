@@ -22,6 +22,8 @@ th { padding: 6px 8px; font-weight: 600; font-size: 11px; color: #666; border-bo
 td { padding: 6px 8px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; text-align: center; }
 tr:hover { background: #fafbff; }
 tr.hidden { display: none; }
+tr.highlight td { background: #fff8d6; }
+tr.highlight:hover td { background: #fff3b8; }
 .rank { font-weight: 700; color: #999; position: sticky; left: 0; background: #fff; z-index: 1; }
 .img { position: sticky; left: 28px; background: #fff; z-index: 1; }
 .img img { width: 36px; height: 36px; object-fit: contain; border-radius: 4px; background: #fafafa; }
@@ -52,7 +54,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <body>
 <div class="header">
   <h1>Dのスニダン ポケカBOX 相場</h1>
-  <div class="updated">更新: 2026/04/12 19:47</div>
+  <div class="updated">更新: 2026/04/12 19:53</div>
 </div>
 <div class="controls">
   <input type="text" id="searchInput" placeholder="検索..." oninput="filterTable()">
@@ -102,7 +104,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">4/12 19:35</td>
 <td class="diff">±0</td><td class="diff down">-¥1,448</td><td class="diff down">-¥2,068</td>
 </tr>
-<tr data-trade="54" data-price="4470" data-d1="470" data-d7="1109" data-d30="2132">
+<tr class="highlight" data-trade="54" data-price="4470" data-d1="470" data-d7="1109" data-d30="2132">
 <td class="rank">4<br><span class="trade-down">(-1)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251223071721-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/724998" target="_blank" rel="noopener">スタデ100「バトルコレクション」</a></td>
@@ -120,7 +122,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">4/12 18:44</td>
 <td class="diff down">-¥150</td><td class="diff up">+¥1,344</td><td class="diff up">+¥3,785</td>
 </tr>
-<tr data-trade="38" data-price="35000" data-d1="5001" data-d7="12709" data-d30="14358">
+<tr class="highlight" data-trade="38" data-price="35000" data-d1="5001" data-d7="12709" data-d30="14358">
 <td class="rank">6<br><span class="trade-up">(+31)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022081426-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/97143" target="_blank" rel="noopener">パラダイムトリガー</a></td>
@@ -174,7 +176,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">6時間前</td>
 <td class="diff down">-¥1,888</td><td class="diff up">+¥183</td><td class="diff up">+¥7,775</td>
 </tr>
-<tr data-trade="25" data-price="24500" data-d1="2501" data-d7="6411" data-d30="9514">
+<tr class="highlight" data-trade="25" data-price="24500" data-d1="2501" data-d7="6411" data-d30="9514">
 <td class="rank">12<br><span class="trade-down">(-4)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022080406-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/127743" target="_blank" rel="noopener">黒炎の支配者</a></td>
@@ -210,7 +212,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">3時間前</td>
 <td class="diff up">+¥499</td><td class="diff up">+¥3,039</td><td class="diff up">+¥7,765</td>
 </tr>
-<tr data-trade="23" data-price="79999" data-d1="9999" data-d7="21448" data-d30="33565">
+<tr class="highlight" data-trade="23" data-price="79999" data-d1="9999" data-d7="21448" data-d30="33565">
 <td class="rank">16<br><span class="trade-up">(+12)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20251022073527-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/86213" target="_blank" rel="noopener">ロストアビス</a></td>
@@ -219,7 +221,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">4/12 19:17</td>
 <td class="diff up">+¥9,999</td><td class="diff up">+¥21,448</td><td class="diff up">+¥33,565</td>
 </tr>
-<tr data-trade="22" data-price="27000" data-d1="4112" data-d7="7663" data-d30="11378">
+<tr class="highlight" data-trade="22" data-price="27000" data-d1="4112" data-d7="7663" data-d30="11378">
 <td class="rank">17</td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20220620101014-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/58920" target="_blank" rel="noopener">ポケモン GO</a></td>
@@ -291,7 +293,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">3時間前</td>
 <td class="diff up">+¥300</td><td class="diff up">+¥1,392</td><td class="diff up">+¥1,575</td>
 </tr>
-<tr data-trade="15" data-price="5000" data-d1="500" data-d7="685" data-d30="702">
+<tr class="highlight" data-trade="15" data-price="5000" data-d1="500" data-d7="685" data-d30="702">
 <td class="rank">25<br><span class="trade-up">(+31)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20230727100424-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/131057" target="_blank" rel="noopener">デッキビルドBOX 黒炎の支配者</a></td>
@@ -363,7 +365,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">1日前</td>
 <td class="diff">±0</td><td class="diff up">+¥764</td><td class="diff up">+¥2,180</td>
 </tr>
-<tr data-trade="11" data-price="24500" data-d1="2500" data-d7="2382" data-d30="3660">
+<tr class="highlight" data-trade="11" data-price="24500" data-d1="2500" data-d7="2382" data-d30="3660">
 <td class="rank">33<br><span class="trade-down">(-8)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20250813065812-0.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/117179" target="_blank" rel="noopener">ポケモンセンター・ジムセット</a></td>
@@ -795,7 +797,7 @@ tr:hover .rank, tr:hover .img, tr:hover .name { background: #fafbff; }
 <td class="time">1日前</td>
 <td class="diff">±0</td><td class="diff up">+¥882</td><td class="diff">-</td>
 </tr>
-<tr data-trade="0" data-price="4000" data-d1="486" data-d7="2744" data-d30="0">
+<tr class="highlight" data-trade="0" data-price="4000" data-d1="486" data-d7="2744" data-d30="0">
 <td class="rank">81<br><span class="trade-down">(-14)</span></td>
 <td class="img"><img src="https://cdn.snkrdunk.com/upload_bg_removed/20230322090006-1.webp?size=m" alt="" loading="lazy"></td>
 <td class="name"><a href="https://snkrdunk.com/apparels/115216" target="_blank" rel="noopener">スターターセットex「ピカチュウex&パーモット」</a></td>
